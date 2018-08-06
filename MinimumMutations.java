@@ -5,12 +5,10 @@ public class MinimumMutations{
    String[] bank;
    String start;
    String end;
-   HashMap<String,Double> distances = new HashMap<String,Double>();
   public MinimumMutations(String start,String end,String[] bank){
       this.start = start;
       this.end = end;
       this.bank = bank;
-      for(String b : bank){distances.put(b,Double.POSITIVE_INFINITY);}
     }
     public ArrayList<String> getNeighbors(String v){
       ArrayList<String> neighbors = new ArrayList<String>();
@@ -36,8 +34,4 @@ public class MinimumMutations{
         }
       return depth;
     }
-
-
-
-
 }
