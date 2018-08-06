@@ -1,28 +1,41 @@
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.ArrayDeque;
 public class MinimumMutations{
-  static String[] bank;
-  static String start;
-  static String end;
-  static HashMap<String,Double> distances = new HashMap<String,Double>();
-  public static void MinimumMutations(String start,String end,String[] bank){
-      start = start;
-      end = end;
-      bank = bank;
+   String[] bank;
+   String start;
+   String end;
+   HashMap<String,Double> distances = new HashMap<String,Double>();
+  public MinimumMutations(String start,String end,String[] bank){
+      this.start = start;
+      this.end = end;
+      this.bank = bank;
       for(String b : bank){distances.put(b,Double.POSITIVE_INFINITY);}
     }
     public ArrayList<String> getNeighbors(String v){
       ArrayList<String> neighbors = new ArrayList<String>();
-      for(String b:bank){
+      for(String b:this.bank){
         int mut = 0;
         for(int i = 0; i < Math.min(b.length(),v.length()); i++){
             if(b.charAt(i) != v.charAt(i)){mut++;}
         }
-        if(mut==1){neighbors.add(v);}
+        if(mut==1){neighbors.add(b);}
       }
       return neighbors;
     }
 
+    public int findMinDistance(){
+        ArrayDeque<String> Q = new ArrayDeque<String>();
+        String current =this.start;
+        int depth = 0;
+        while(this.end != current){
+            ArrayList<String> N = getNeighbors(current);
+            for(String n:N){Q.push(n);}
+            current = Q.pop();
+            depth++;
+        }
+      return depth;
+    }
 
 
 
