@@ -1,0 +1,315 @@
+Homework 1:
+  on github classroom
+  first five questions by friday, 08/03, 5pm
+  rest due at 9am august 6th
+  submit screenshot of test output
+
+Day4:
+  Generics, multitype objects <>
+  Reflections, inspects object properties at runtime
+  final (variables), finalize(garbage collection), finally(try catch).
+  Garbage collection:
+    removes dereferenced objects
+    Daemon Thread, Background process (low-priority)
+  finalize() method (all objects). Override to define some behavior on garbage collection.
+  Threads:
+    starting a program initializes three Threads
+      main
+      Garbage Collector - Daemon Thread
+      Thread Scheduler  - Daemon Thread
+  9am assignment posted
+  1230-230 google meet
+  3-330 hr presentation
+
+
+-----Databases------
+
+Collection of tables of entities for storing Databases
+
+Relational database
+  tables are related by keys to maintain referential integrity
+  oracle DB, microsoft sql server, mySQL
+
+Communicate with DB using SQL(structured query language)
+  DB systems have their own dialect
+  PL/SQL -Oracle DB (Procedural Language SQL)
+  Non-relational DB (NoSQL)
+    Document based
+
+Keys (Natural and Surrogate)
+    Natural- part of the date already
+    Surrogate - generated for the purpose of being a unique key
+    Composite- generated from multiple foreign keys
+Multiplicity Relationships
+  one-one
+  one- many
+  many-many
+
+Normalization
+  -Process of organization information into tables to reduce redundancy and ensure referential integrity
+  -"6 levels",
+
+  First normal form:
+    database tables, rows and columns, pk uniquely identifying each row
+    columns contain atomic values
+    no repeating groups of columns
+  Second Normal form
+    FNF + all non-key columns are dependent on PK
+    In each column, does it describe what the primary key identifies.
+  Third Normal form
+    SNF + no Transitive dependency
+    Columns that can be inferred from one another
+---SubLanguages----
+DDL (Data Definition Language)
+  -used for structure of DB
+  -create: to create a table, constraint, user, schema... any DB structure.
+  -alter: to change a DB structure.
+  -truncate: purge data, keeping structure. Can't undo.
+  -drop: removes structure completely.
+DML (Data Manipulation Language)
+  -for working with actual entries. Operations can be rolled back.
+  -insert: adds specific entries
+  -update: change existing record
+  -delete: deletes specific entries
+  -Select: for retrieving a result set (sometimes subset of DML: DQL(Data Query Language))
+DCL(Data Control Language)
+  -Controlling Access to data/permissions
+  -grant (give permission)
+  -revoke (take away permission)
+TCL(Transaction Control Language)
+  -Transaction is a unit of work done on a DB
+  -Commit: save changes (no rollback)
+  -Rollback: undo
+  -SavePoint: Rollback to savepoint during operation (mid action)
+
+
+DAO:
+  Separation of logic, pojos, interface, and DAO implementations.
+  implementations are just CRUD (Create, Read, Update, Delete)
+
+-----SELECT STATEMENTS-------
+  SELECT [columns or *]
+  FROM [Table list]
+  WHERE [conditions]
+  GROUP BY [column list] (w/o HAVING gives distinct values of specified columns)
+  HAVING  [condition] (AGGREGATE quantities)
+  ORDER BY [column list]
+
+----JOINS---
+  Types of Joins:
+    Inner: matching paramaters
+    Left (outer): includes all the information of the "left" table, whether or not they have
+      right table values specified
+    Right (outer): Same as left join but for right table.
+    Full (outer): get full venn diagram.
+    Self join:
+    Cross join:
+--SET OPERATIONS---
+  Union: Everything with no duplicates
+  Union all: allows duplicates
+  Intersection: elements only in both result sets
+  Minus: unique to one set
+--SUBQUERIES--
+  queries within the where clause of other queries used to further refine result set.
+  Non-Correlated: inner query can execute independently of the outer query
+  Correlated:
+
+--CURSORS---
+  Oracle creates a "context area" with all info necessary for processing a SQL statement
+  "cursor" is a pointer to context area.
+  "active set" is rows returned by a statement, and held by cursor.
+  Implicit cursor: created behind the scenes whenever a DML statement is exectuted.
+  Explicit cursor: programmer defined, gives us more control over context area.
+    'Declare' - initialize memory
+    'Open' it - allocate memory
+    'Fetch' data
+    'Close' it - release memory
+  Indexes applied to column enforce physical in-memory ordering of rows
+    speeds up search
+    unique fk,pk constraints create 'backing indices' (so cant put additional indices of your own on these columns)
+    CREATE INDEX [table][column] ASC|DESC
+----Transactions----
+  ACID properties : Atomicity - all or nothing (either commit, or entirely rollback)
+                    Consistency - DB is in valid state after commit
+                    Isolation - System state during concurrent transactions should look like transactions were sequential
+                    Durability - All commits are final and cannot be rolled back, even in the event of system failure.
+-----Isolation problems----
+  Dirty read: tx a begins, makes changes
+              tx b reads uncommitted changes
+              if tx a fails and rolls back, b may be invalid
+  Non-Repeatable read: tx a reads and begins using some set of data.
+                       meanwhile, tx b changes that data and commits.
+                       tx a may no longer be valid, a cannot retrieve data again.
+  Phantom reads: tx a begins with some query.
+                 meanwhile tx b inserts data matching that query.
+                 tx a then re-queries to find extra "phantom" data.
+
+----JDBC (Java DataBase Connectivity)
+  package:java.sql
+  SQLException common type of checked Exception
+    we are required by compiler to anticipate checked exception
+  Interfaces of JDBC:
+    Connection - represents a session with a specific database
+      sql statements are executed and results returned within the
+      context of a connection.
+      getMetaData method for information about DB.
+      Should use connection methods to do any configurations.
+      AutoCommit is on by default (can use setAutoCommit to disable).
+
+    Statement - execute a string as a sql query (don't use)
+    PreparedStatement - Object which represents a compiled SQL statement.
+      Efficiently execute statement many times.
+    PreparedStatement pstmt = Connection con.prepareStatement("UPDATE EMPLOYEE SET SALARY = ? WHERE E_ID = ?")
+            pstmt.setBigDecimal(1(element index),  81355 (value))
+    CallableStatment extends PreparedStatement - used to execute stored procedure
+      ? = call<procedure name>[args]
+    ResultSet - Table of data representing a DB ResultSet.
+      maintains a cursor pointing to the first row.
+
+
+
+-----HTML/CSS--------
+<!Doctype html>
+  <head>
+    title, charset, external scripts.
+    external scripts and style sheets go here.
+  </head>
+  <body>
+  what will be displayed.
+  <p></p>
+  <a href = "....">anchor, href is the uri</a>
+  <img src  = ' '>
+
+  </body>
+</html>
+
+-----CSS-----
+  Styling: inline, internal, external <link rel = "stylesheet" href = '....'/>
+
+  h1{
+  ^^selector
+  color: red;
+  background-color: blue;
+  } applies to all h1's
+
+
+----JAVASCRIPT------
+  Not java!!!! at all
+  ES (ECMA script) 6
+  Interpreted not compiled
+    -loose typing
+    -errors tend to be silent
+    -first mainstream lambda based Language
+  callback functions - functions as parameters
+  anonymous functions - no name
+  Objects are containers of Property-Value pairs
+  Prototypal inheritance - objects inherit directly from other objects.
+  Every object has a --proto-- property which is its parent.
+  For client-side: include .js files in <script> element.
+  Booleans:
+    "truthy" and "falsy"
+    true- anything that is not "falsy"
+    false- anything not "truthy"
+    falsy- false, 0 , "", null, undefined (default value), NaN.
+
+  && still "and" a && b if a evaluates to truthy b is returned
+  || still "or", a || b(default) , if a evaluates to falsy b is returned
+  constructor form: function Person(name,age){
+                            this.name = name;
+                            this.age = age;
+                    }
+
+  --JS hw part 1 ---Due Aug 17 5pm--
+
+
+---SDLC(Software Development Life Cycle)-----
+  Big Bang
+    Everything all at once
+    no formal structure
+    ok for very small projects
+    much mgmt overhead
+  Waterfall
+    well defined requirements that don't change
+    low mgmt overhead
+    good for large projects with well defined end
+  Iterative
+    Add new modular requirements with each iteration
+    Can become complex.
+    Some mgmt overhead, are new things breaking old things.
+  Agile
+    Implementation of iterative model.
+    Accredited to Martin Fowler, Agile manifesto.
+    Break business requirements into small modular pieces (user stories)
+    Good user stories are role based and as independent as possible.
+    Accountable to a product manager.
+    Track Stories through stages: backlog, in progress , testing , review, done, released.
+    Two Implementations:
+        Scrum
+          Accomplish work in short "sprints"(2-3 weeks)
+          take time to work on a specific set of user stories
+          determined during sprint planning.
+          Keep track of progress on "burndown chart";
+          Daily stand up- short daily check in.
+        Kanban
+          longer term projects with different sub-projects
+
+
+---------HTTP (HYPER TEXT TRANSFER PROTOCOL)----
+    HTTP request------>
+                <------HTTP response
+
+  HTTP methods (verbs)
+    -Get: Generally used to retrieve a resource
+          Parameters sent via url, either by routing or query String
+          Nothing in request body. Not great for sensitive information.
+          Limited to url length.
+    -Post: Send information in request body. No size limit.
+           Better for sensitive information.
+    -Put: replaces resource.
+    -Delete
+    -Trace: Pings endpoint
+    -Options
+    -Head: all metadata.
+    -Patch
+
+  HTTP requests: encapsulated within an xml document.
+      Header(metadata), body (data), HTTP version, url
+
+  HTTP response:
+    Header, body, http version, status code(1xx's received, 2xx's OK, 3xx's redirect, 4xx's bad request, 5xx's internal server errors).
+  How to send http requests:
+    HTML forms, anchors, remotely hosted resources(stylesheets, scripts, etc.. when page loads).
+    Not asynchronous - problem
+    Asynchronous Javascript And XML (AJAX)
+      Not a programming language or framework.
+      A set of interactions between the DOM (document object model) and XmlHTTPRequest object (xhr)
+      obtained form browser.
+      Asynchronous because requests don't need to wait for each other.
+      Different parts of page can load independently.
+     What do we need?
+        Event occurs on clientside
+        obtain xhr object
+        send http request
+        process response to update page
+ ----XHR OBJECT----
+  IE 5,6 dont support, otherwise, get XHR from window
+  methods:
+    new XmlHTTPRequest();
+    abort()
+    getResponseHeader/getAllResponseHeaders()
+    open(verb-HTTPmethod , url , async-defaults to true, username-optional, password-optional)
+    send(content)
+    Properties:
+        readystate (0-4):
+          0 request not initialized
+          1 server connection established
+          2 request received
+          3 request being processed
+          4 response ready
+        onReadyStateChange - function to be executed when ready state changes.
+     ----ajax workflow----
+      get xhr object --> define onReadyStateChange --> open( ) to prepare --> send()
+
+-----Post,Put,Patch-----
+    Post-For creation, Accept as a "child" at that resource. Not idempotent.
+    Put-for updating an existing resource. Idempotent.
