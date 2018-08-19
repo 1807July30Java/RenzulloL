@@ -78,7 +78,7 @@ function getSkills(){
       for(j = 0; j < skilltab.length;j++){
         retskills.push(skilltab[j]);
         if(skilltab[j].selected){
-          console.log(skilltab[j].textContent);
+          console.log(skilltab[j].value);
         }
       }
     }
@@ -203,25 +203,6 @@ In this example, green is the new value and blue is the old value.
 
 Make the background color (of all favoriteColor radio buttons)  the newly selected favoriteColor
  */
-function addBackgroundColorsToButtons(){
-  var blue = document.createElement('style');
-  blue.type = 'text/css';
-  blue.innerHTML = '.blue { border-style: solid; border-color: blue; border-width: 15px; visibility: visible; }';
-  var green = document.createElement('style');
-  green.type = 'text/css';
-  green.innerHTML = '.green { border-style: solid; border-color: green; border-width: 15px;visibility: visible;}';
-  var red = document.createElement('style');
-  red.type = 'text/css';
-  red.innerHTML = '.red { border-style: solid; border-color: red; border-width: 15px;visibility: visible;}';
-  var orange = document.createElement('style');
-  orange.type = 'text/css';
-  orange.innerHTML = '.orange { border-style: solid; border-color: orange; border-width: 15px:visibility: visible; }';
-  document.getElementsByTagName('head')[0].appendChild(blue);
-  document.getElementsByTagName('head')[0].appendChild(green);
-  document.getElementsByTagName('head')[0].appendChild(red);
-  document.getElementsByTagName('head')[0].appendChild(orange);
-};
-addBackgroundColorsToButtons();
  function makeColorsAlert(){ //uses closure to ensure client cannot hack which button was previously selected.
    var oldButton;           ///here at Revature we take security VERY seriously.
    var rbc = document.getElementsByName("favoriteColor");
@@ -232,7 +213,7 @@ addBackgroundColorsToButtons();
      }
      oldButton = this;
      var rbc2 = document.getElementsByName("favoriteColor");
-     rbc2.forEach(function(element){element.className = oldButton.value;});
+     rbc2.forEach(function(element){element.style.backgroundColor = oldButton.value;});
     }
    });
  };
@@ -270,3 +251,79 @@ function toggleHideEmployees(){
   }
 };
 toggleHideEmployees();
+
+/*
+ 10. Current Time
+
+Regarding this element: <h5 id="currentTime"></h5>
+
+Show the current time in this element in this format: 9:05:23 AM
+
+The time should be accurate to the second without having to reload the page.
+*/
+function updateTime(){
+  var ct = document.getElementById("currentTime");
+  var d = new Date(Date.now());
+  var ampm = "AM";
+  var t;
+  if(d.getHours()>12){
+    ampm = "PM";
+    var t = (d.getHours()-12) + ":" + d.getMinutes() + ":" + d.getSeconds() + " " +ampm;
+  }
+  else{
+    ampm = "AM";
+    var t = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + " " + ampm;
+  }
+  ct.innerText = t;
+};
+setInterval(updateTime,1000);
+
+/*
+11. Delay Regarding this element:
+
+<p id="helloWorld">Hello, World!</p>
+
+Three seconds after a user clicks on this element, change the text to a random color.
+*/
+
+function changeColorsAtInterval(){
+  var hw = document.getElementById("helloWorld");
+  hw.onclick = function(){
+    setTimeout(function(){
+      var e = document.getElementById("helloWorld");
+      a = Math.floor(Math.random()*256);
+      b = Math.floor(Math.random()*256);
+      c = Math.floor(Math.random()*256);
+      e.style = "color:RGB(" + a +"," +  b+"," + c +")"},3000)
+  }
+};
+changeColorsAtInterval();
+
+
+/*
+12. Walk the DOM
+
+Define function walkTheDOM(node, func)
+
+This function should traverse every node in the DOM.  Use recursion.
+
+On each node, call func(node).
+*/
+function walkTheDOM(node,func){
+  var seen = []
+  function walk(nd){
+    var stack = [];
+    var ch = nd.childNodes;
+    for(i = 0; i < ch.length;i++){stack.push(ch[i])};
+    while(stack.length>0){
+      var n = stack.pop();
+      if(seen.lastIndexOf(n)=== -1|| seen.length == 0){
+        console.log(n);
+        seen.push(n);
+        func(n);
+        walk(n);
+      }
+    }
+  };
+  walk(node);
+};
