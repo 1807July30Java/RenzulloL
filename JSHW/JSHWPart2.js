@@ -238,7 +238,15 @@ addBackgroundColorsToButtons();
  };
  makeColorsAlert();
 
+/*
+9. Show/Hide Event
 
+NOTE: Write unobtrusive Javascript
+
+When user hovers over an employees name:
+
+Hide the name if shown. Show the name if hidden.
+*/
 function toggleHideEmployees(){
   var tog = true;
   var e = document.getElementsByClassName("empName");
