@@ -7,10 +7,10 @@ Find the html element that contains "USA".
 Print that element's contents.
 */
 function getUSA() {
-    var usa = document.getElementById("USA");
-    var usapar = usa.parentElement;
+    var usa =  document.querySelectorAll("[data-customAttr = 'USA']");
+    var usapar = usa[0].parentElement;
     console.log(usapar.innerText);
-    return usa;
+    return usa[0];
 };
 
 /*
@@ -61,13 +61,8 @@ function getAnchorChildren(){
 
 /*
 4. Hobbies
-
 Define function getSkills()
-
-
-
 Find all checked options in the 'skills' select element.
-
 Print the value and the contents.
 */
 function getSkills(){
@@ -309,7 +304,7 @@ This function should traverse every node in the DOM.  Use recursion.
 
 On each node, call func(node).
 */
-function walkTheDOM(node,func){
+function walkTheDOM(node,func){//depth first search
   var seen = []
   function walk(nd){
     var stack = [];
