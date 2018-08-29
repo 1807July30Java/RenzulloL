@@ -44,7 +44,6 @@ public class RegisterServlet extends HttpServlet {
 		String lname = request.getParameter("lastname");
 		String managername = request.getParameter("managername");
 		String pass = request.getParameter("password");
-		System.out.println(username + pass + managername);
 		Employee E = ed.getEmployeeByUsername(managername);
 		if(E != null) {
 			if(ed.newEmployee(username,fname,lname,pass, E.getEmployeeId())) {

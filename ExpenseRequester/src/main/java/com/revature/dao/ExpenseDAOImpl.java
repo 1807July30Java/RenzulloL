@@ -106,7 +106,6 @@ public class ExpenseDAOImpl implements ExpenseDAO {
 
 	@Override
 	public void newExpense(Date date, int amount, int EmployeeId,int managerid,String desc,InputStream blob){
-		System.out.println("tried to add exp");
         try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) { 
             String sql = "INSERT INTO EXPENSEREQ(EMPLOYEE_ID,MANAGER_ID,EXPENSE_DATE,EXPENSE_AMOUNT,EXPENSE_DESCRIPTION,IMAGEBLOB) VALUES (?,?,?,?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(sql);
@@ -124,12 +123,10 @@ public class ExpenseDAOImpl implements ExpenseDAO {
 	
 	public boolean approveExpense(int ExpenseId) {
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
-			System.out.println(ExpenseId);
             String sql = "UPDATE EXPENSEREQ SET APPROVED = 1 WHERE EXPENSE_ID = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1,ExpenseId);
             if(pstmt.executeUpdate()>0) {
-            	System.out.println("true");
             	return true;
             }
             
@@ -140,12 +137,10 @@ public class ExpenseDAOImpl implements ExpenseDAO {
 	}
 	public boolean denyExpense(int ExpenseId) {
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
-			System.out.println(ExpenseId);
             String sql = "UPDATE EXPENSEREQ SET APPROVED = 2 WHERE EXPENSE_ID = ?";
             PreparedStatement pstmt = con.prepareStatement(sql);
             pstmt.setInt(1,ExpenseId);
             if(pstmt.executeUpdate()>0) {
-            	System.out.println("true");
             	return true;
             }
             
@@ -161,7 +156,6 @@ public class ExpenseDAOImpl implements ExpenseDAO {
             pstmt.setBlob(1, blob);
             pstmt.setInt(2,Expenseid);
             if(pstmt.executeUpdate()>0) {
-            	System.out.println("true");
             	return true;
             }
             
@@ -178,7 +172,6 @@ public class ExpenseDAOImpl implements ExpenseDAO {
             pstmt.setInt(1,ExpenseId);
             ResultSet rs = pstmt.executeQuery();
             if(rs.next()) {
-            	System.out.println("true");
             	im = rs.getBytes("IMAGEBLOB");
             	return im;
             }

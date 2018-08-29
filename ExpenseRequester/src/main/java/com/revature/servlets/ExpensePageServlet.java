@@ -11,9 +11,7 @@ import javax.servlet.http.HttpSession;
 public class ExpensePageServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-		//System.out.println(req.getSession(false).getAttribute("username"));
 		HttpSession session = req.getSession(false);
-		//String username = (String)session.getAttribute("username");
 		try{
 			String username = (String)session.getAttribute("username");
 			if(session!= null && username != null) {

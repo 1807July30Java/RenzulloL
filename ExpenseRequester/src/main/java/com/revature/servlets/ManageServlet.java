@@ -32,7 +32,6 @@ public class ManageServlet extends HttpServlet {
 		}
 		else {
 			if(session!= null) {
-				System.out.println((String)session.getAttribute("username") + " accessing all expenses");
 				String a = om.writeValueAsString(ex.getAllExpenses());
 				pw.write(a);
 			}

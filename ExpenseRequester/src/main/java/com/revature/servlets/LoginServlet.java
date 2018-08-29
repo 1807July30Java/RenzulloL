@@ -31,7 +31,6 @@ public class LoginServlet extends HttpServlet{
 	}
 	
 	protected void doPost(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("login");
 		String username = req.getParameter("email").toLowerCase();
 		String password = req.getParameter("password");
 		Employee E = AuthenticationService.isValidUser(username,password);

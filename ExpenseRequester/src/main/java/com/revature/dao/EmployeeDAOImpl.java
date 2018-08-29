@@ -20,8 +20,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
 	public Employee getEmployeeById(int EmployeeId) { 
 		Employee E = null;
-		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {	
-	        //using a Statement--beware injection
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 	        String sql = "SELECT * FROM EMPLOYEE WHERE EMPLOYEE_ID = ?";
 	        PreparedStatement stmt = con.prepareStatement(sql);
 	        stmt.setInt(1, EmployeeId);
@@ -35,7 +34,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 int manager_id = rs.getInt("MANAGER_ID");
                 E = new Employee(id, manager_id, email,fname,lname, password);
 	        } else {
-	            System.out.println("No Employees with that username/password combo");
+	            System.out.println("No Employees with that ID");
 	        }
 	        con.close();
 	        return E;

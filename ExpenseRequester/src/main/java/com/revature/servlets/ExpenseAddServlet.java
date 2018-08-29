@@ -31,13 +31,11 @@ public class ExpenseAddServlet extends HttpServlet {
 		Employee E = em.getEmployeeById(Exp.getEmployeeId());
 		if(val ==1 && E.getManagerId() == Mg.getEmployeeId()) {
 			if(ex.approveExpense(ExpenseId)) {
-				System.out.println("approved");
 				pw.write(req.getParameter("ExpenseId"));
 				}
 		}
 		else if(val == 2 && E.getManagerId() == Mg.getEmployeeId()) {
 			if(ex.denyExpense(ExpenseId)) {
-				System.out.println("denied");
 				pw.write(req.getParameter("ExpenseId"));
 				}
 		}

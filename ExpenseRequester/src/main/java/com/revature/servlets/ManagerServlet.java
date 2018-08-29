@@ -19,7 +19,6 @@ public class ManagerServlet extends HttpServlet {
 	EmployeeDAO ed = new EmployeeDAOImpl(); 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		HttpSession session = req.getSession(false);
-		//System.out.println(session.getAttribute("username"));
 		if(session!= null) {
 			resp.setContentType("application/json");
 			PrintWriter pw = resp.getWriter();
@@ -29,16 +28,9 @@ public class ManagerServlet extends HttpServlet {
 			String r = om.writeValueAsString(ed.getManagedEmployees(e.getEmployeeId()));
 			pw.write(r);
 		}
-		//else {
-			//System.out.println("inactive session, no employees managed");
-			//resp.sendRedirect("login");
-		//}
 	}
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		doGet(req,resp);
 	}
 
-	//protected static void doPostt(HttpServletRequest req, HttpServletResponse resp) {
-		
-	//}
 }
