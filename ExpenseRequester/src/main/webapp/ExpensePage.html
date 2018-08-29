@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel = "stylesheet" type = "text/css" href = "styles/ERstyles.css"/>
+
+<script src = "scripts/TableHandler.js"></script>
+<script src = "scripts/ManageExpense.js"></script>
+<script src = "scripts/EmpInfo.js"></script>
+<title>Expense</title>
+</head>
+<body>
+	<div id = "employeeinfo" class = "displayDiv">
+		<h2 id = "employeename">
+		Welcome!
+		</h2>
+		<input type = "button" value = "settings" onclick = "onclickSettings()"/>
+	 	<a href = "logout">logout</a>
+	</div>
+  <div class = "displayDiv">
+  	
+    <form id = "newExpense" method = "post" action = "expense" enctype='multipart/form-data'>
+      Expense date <input required type = "date" name = "expensedate" id = "expensedate"/>
+      Amount <input required type = "number" name = "expenseamount" id = "amount"/>
+      Choose Receipt Image<input required type ="file" name = "imagefile" id = "imagefile"/>
+      <input type = "submit" value = "Add Expense"/>
+    </form>
+	</div>
+	<div id = "ERtableContainer" class = "displayDiv">
+		<div class = "tableContainer">
+		<h3>Pending Expense Requests</h3>
+	      <table  id = "ERtableUA" class = "centerform">
+	      <tr>
+	      	<td>Approving Manager</td>
+	    	<td>Expense Date</td>
+	    	<td>Amount</td>
+	    	<td>Description</td>
+	    	<td>Expense Id</td>
+	    	</tr>
+	      </table>
+	      </div>
+	      <div class = "tableContainer">
+	      	<h3>Approved Expense Requests</h3>
+	      	<table  id = "ERtableA">
+	      	<tr>
+	      		<td>Approving Manager</td>
+	    		<td>Expense Date</td>
+	    		<td>Amount</td>
+	    		<td>Description</td>
+	    		<td>Expense Id</td>
+	    	</tr>
+	      	</table>
+	      	</div>
+	      	<div class = "tableContainer">
+	      	<h3>Denied Expense Requests</h3>
+	      	<table  id = "ERtableD">
+	      	<tr>
+	      		<td>Approving Manager</td>
+	    		<td>Expense Date</td>
+	    		<td>Amount</td>
+	    		<td>Description</td>
+	    		<td>Expense Id</td>
+	    	</tr>
+	      	</table>
+	      	</div>
+	      	</div>
+    
+    <div id = "EmployeeExpenses" class = "displayDiv">
+    	<div id = "EmployeeTableContainer">
+    	<h3>Your Employee's</h3>
+      <select id = "EmployeeSelection">
+	</select>
+    </div>
+    	<div id = "ExpenseTables">
+	    	<div class = "tableContainer">
+	    	<h3>Unapproved Employee Expenses</h3> 
+		    	<table id = "EmployeeExpenseTableUA">
+		    	<tr>
+		    	<td>Approving Manager</td>
+		    	<td>Expense Date</td>
+		    	<td>Amount</td>
+		    	<td>Description</td>
+		    	<td>Expense Id</td>
+		    	</tr>
+		    	</table>
+		    </div>
+		    <div class = "tableContainer">
+	    	<h3>Approved Employee Expenses</h3>
+		    	<table id = "EmployeeExpenseTableA">
+		    	<tr>
+		    	<td>Approving Manager</td>
+		    	<td>Expense Date</td>
+		    	<td>Amount</td>
+		    	<td>Description</td>
+		    	<td>Expense Id</td>
+		    	</tr>
+		    	</table>
+	    	</div>
+	    	<div class = "tableContainer">
+	    	<h3>Denied Employee Expenses</h3>
+		    	<table id = "EmployeeExpenseTableD">
+		    	<tr>
+		    	<td>Approving Manager</td>
+		    	<td>Expense Date</td>
+		    	<td>Amount</td>
+		    	<td>Description</td>
+		    	<td>Expense Id</td>
+		    	</tr>
+		    	</table>
+	    	</div>
+    	</div>
+    	<input type = "button" value = "Approve" onclick = "ApproveExpense('EmployeeExpenseTableUA')"/>
+    	<input type = "button" value = "Deny" onclick = "DenyExpense('EmployeeExpenseTableUA')" />
+    </div>
+    <div id = "allexpensesContainer" class = "displayDiv">
+    	<div id = "allexpensestableAContainer" class = "tableContainer">
+    	<h3>All Approved Expenses</h3>
+    	<table id = "allexpensestableA">
+    		<tr>
+    			<td>Approving Manager</td>
+		    	<td>Expense Date</td>
+		    	<td>Amount</td>
+		    	<td>Description</td>		    	
+		    	<td>Expense Id</td>
+		    	<td>Employee Id</td>
+		    </tr>
+    	</table>
+    	</div>
+    	<div id = "allexpensestableDContainer" class = "tableContainer">
+    	<h3>All Denied Expenses</h3>
+    	<table id = "allexpensestableD">
+    		<tr>
+    			<td>Approving Manager</td>
+		    	<td>Expense Date</td>
+		    	<td>Amount</td>		    
+		    	<td>Description</td>	
+		    	<td>Expense Id</td>
+		    	<td>Employee Id</td>
+		    </tr>
+    	</table>
+    	</div>
+    </div>
+    
+    
+
+</body>
+</html>
