@@ -18,7 +18,13 @@
 		</fieldset>
 		<br>
 		<input type = "submit" value = "login"/>
-	</form>
+		</form>
+		<form id = "forgotpassword" action = "settings?op=loginhelp" method = "post">
+		<legend>Recovery Email:</legend>
+		<input required name = "email" pattern ="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
+		<input type = "submit" value = "forgot password">
+		</form>
+	
 </div>
 
 </body>

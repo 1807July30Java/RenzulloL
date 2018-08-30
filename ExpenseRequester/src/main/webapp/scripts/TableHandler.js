@@ -104,7 +104,7 @@ function getSelectedFromTable(tablename){
   var ret = [];
   var t = document.getElementById(tablename);
   var tr = t.rows;
-  for(i = 0; i < tr.length;i++){
+  for(i = 1; i < tr.length;i++){
     if(tr[i].getAttribute("selected") === "true" && tr[i].parentElement.id === tablename){
       ret.push(tr[i]);
     }
@@ -137,9 +137,12 @@ function employeeOnSelect(){
 	var exptbu = document.getElementById("EmployeeExpenseTableUA");
 	var exptba = document.getElementById("EmployeeExpenseTableA");
 	var exptbd = document.getElementById("EmployeeExpenseTableD");
-	exptbu.innerHTML = "<tr><td>Approving Manager</td><td>Expense Date</td><td>Amount</td><td>Description</td><td>Expense Id</td></tr>";
-	exptba.innerHTML = "<tr><td>Approving Manager</td><td>Expense Date</td><td>Amount</td><td>Description</td><td>Expense Id</td></tr>";
-	exptbd.innerHTML = "<tr><td>Approving Manager</td><td>Expense Date</td><td>Amount</td><td>Description</td><td>Expense Id</td></tr>";
+	//exptbu.innerHTML = "<tr><td>Approving Manager</td><td>Expense Date</td><td>Amount</td><td>Description</td><td>Expense Id</td></tr>";
+	//exptba.innerHTML = "<tr><td>Approving Manager</td><td>Expense Date</td><td>Amount</td><td>Description</td><td>Expense Id</td></tr>";
+	//exptbd.innerHTML = "<tr><td>Approving Manager</td><td>Expense Date</td><td>Amount</td><td>Description</td><td>Expense Id</td></tr>";
+	exptbu.innerHTML = "";
+	exptba.innerHTML = "";
+	exptbd.innerHTML = "";
 	var emp  = sel.selectedOptions[0];
 	putEmployeeInfo(emp)
 	AjaxGet("manage?" + emp.getAttribute("email"),PopulateSelectedEmployeeExpenses);

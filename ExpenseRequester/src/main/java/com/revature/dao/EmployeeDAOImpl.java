@@ -107,7 +107,44 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 String lname = rs.getString("LAST_NAME");
                 int password = rs.getInt("PASSWORD");
                 int manager_id = rs.getInt("MANAGER_ID");
+                int temppass = rs.getInt("TEMP_PASSWORD");
                 E = new Employee(id, manager_id, email,fname,lname, password);
+                if(temppass != 0) {
+                	E.setTempPass(temppass);
+                }
+            } else {
+                System.out.println("No Employees with that username/password combo");
+            }
+            con.close();
+            return E;
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+        
+    }
+	public Employee getEmployeeByTempLogin(String name, int Password) {
+		Employee E = null;
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {	
+            //using a Statement--beware injection
+            String sql = "SELECT * FROM EMPLOYEE WHERE EMAIL = ? AND TEMP_PASSWORD = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, name);
+            stmt.setInt(2, Password);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+            	int id = rs.getInt("EMPLOYEE_ID");
+                String email = rs.getString("EMAIL");
+                String fname = rs.getString("FIRST_NAME");
+                String lname = rs.getString("LAST_NAME");
+                int password = rs.getInt("PASSWORD");
+                int manager_id = rs.getInt("MANAGER_ID");
+                int temppass = rs.getInt("TEMP_PASSWORD");
+                E = new Employee(id, manager_id, email,fname,lname, password);
+                if(temppass != 0) {
+                	E.setTempPass(temppass);
+                }
             } else {
                 System.out.println("No Employees with that username/password combo");
             }
@@ -137,7 +174,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 String lname = rs.getString("LAST_NAME");
                 int password = rs.getInt("PASSWORD");
                 int manager_id = rs.getInt("MANAGER_ID");
+                int temppass = rs.getInt("TEMP_PASSWORD");
                 E = new Employee(id, manager_id, email,fname,lname, password);
+                if(temppass != 0) {
+                	E.setTempPass(temppass);
+                }
             } else {
                 System.out.println("No Employees with that username");
             }
@@ -175,6 +216,24 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             String sql = "UPDATE EMPLOYEE SET PASSWORD = ? WHERE EMPLOYEE_ID = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, password.hashCode());
+            stmt.setInt(2, employeeid);
+            if (stmt.executeUpdate() > 0) {
+                return true;
+            } 
+            con.close();
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+		return false;
+     
+	}
+	public boolean updateEmployeeTempPassword(int employeeid, int password)  {
+		Employee E = null;
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {	
+            //using a Statement--beware injection
+            String sql = "UPDATE EMPLOYEE SET TEMP_PASSWORD = ? WHERE EMPLOYEE_ID = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, password);
             stmt.setInt(2, employeeid);
             if (stmt.executeUpdate() > 0) {
                 return true;

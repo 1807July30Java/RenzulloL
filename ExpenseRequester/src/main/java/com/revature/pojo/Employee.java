@@ -7,6 +7,7 @@ public class Employee {
 	private String firstname;
 	private String lastname;
 	private int password;
+	private int tempPass;
 	public Employee(int EmployeeId, int ManagerId,String Email, String firstname, String lastname, int password){
 		this.EmployeeId = EmployeeId;
 		this.setManagerId(ManagerId); 
@@ -14,6 +15,7 @@ public class Employee {
 		this.setFname(firstname);
 		this.setLname(lastname);
 		this.password = password;
+		this.tempPass = 0;
 	}
 	public int getEmployeeId() {
 		return EmployeeId;
@@ -48,6 +50,12 @@ public class Employee {
 	}
 	public void setEmail(String email) {
 		Email = email;
+	}
+	public int getTempPass() {
+		return tempPass;
+	}
+	public void setTempPass(int tempPass) {
+		this.tempPass = tempPass;
 	}
 	
 	

@@ -15,11 +15,19 @@ body {
 	display: inline-block;
 	border: solid black 0px;
 	background-color: #c7d1c6;
-	padding:5px;
-	overflow:scroll;
+	padding:8px;
 	height: 250px;
-	width: auto;
-	overflow:auto;
+	width: 32%;
+	overflow:scroll;
+}
+.tableContainerNoScroll{
+	display: inline-block;
+	border: solid black 0px;
+	background-color: #c7d1c6;
+	padding:8px;
+	height: auto;
+	width: 32%;
+
 }
 .nothover,
 .unselected {
@@ -27,8 +35,12 @@ body {
 }
 tr{
 	outline: solid #7e967c 0px;
-	text-align:center;
 	padding: 3px;
+    text-align:center;
+	width:100%;
+}
+table{
+	width:100%;
 }
 .selected{
 	background-color: #c6e2c3;

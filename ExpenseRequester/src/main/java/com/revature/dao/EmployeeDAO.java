@@ -14,4 +14,6 @@ public interface EmployeeDAO {
 	public boolean updateEmployeePassword(int employeeid, String password);
 	public boolean updateEmployeeEmail(int employeeid,String email);
 	public Employee getExpenseManager(int expenseid);
+	public boolean updateEmployeeTempPassword(int employeeid, int password);
+	public Employee getEmployeeByTempLogin(String name, int Password);
 }
