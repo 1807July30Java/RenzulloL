@@ -112,7 +112,7 @@ function showExpenseImageFromTable(tablename,expenseid,url){
 				var imgg = document.createElement("img");
 				imgg.src = url;
 				imgg.name = "rxpt"
-				imgg.style = "width:100px;height:auto";
+				imgg.style = "width:50px;height:auto";
 				function openImage(){
 					window.open(url,'_blank');
 				};

@@ -54,9 +54,11 @@ function addEmployeeToSelect(selection,func,Emp){
 	  op.value = Emp.fname + " " + Emp.lname;
 	  op.innerText = Emp.fname + " " + Emp.lname;
 	  op.setAttribute("email",Emp.email);
+	  op.setAttribute("info",JSON.stringify(Emp));
 	  sel.onchange = func; 
 	  if(sel.childElementCount < 1){
 		  op.selected = true;
+		  putEmployeeInfo(op);
 		  AjaxGet("manage?" + Emp.email,PopulateSelectedEmployeeExpenses);
 	  }
 	  sel.add(op);
@@ -121,6 +123,15 @@ function AjaxGet(url, func){
   xhr.send();
 }
 
+function putEmployeeInfo(op){
+	var info = JSON.parse(op.getAttribute("info"));
+	var disp = document.getElementById("EmployeeInfoDisplay");
+	disp.innerText = "Employee Id: " + info["employeeId"] + "    " + 
+	"Name:" + info["fname"] + " "+
+	info["lname"] + "               "+
+	"Email: " +info["email"] + "    ";
+}
+
 function employeeOnSelect(){
 	var sel = document.getElementById("EmployeeSelection");
 	var exptbu = document.getElementById("EmployeeExpenseTableUA");
@@ -129,7 +140,9 @@ function employeeOnSelect(){
 	exptbu.innerHTML = "<tr><td>Approving Manager</td><td>Expense Date</td><td>Amount</td><td>Description</td><td>Expense Id</td></tr>";
 	exptba.innerHTML = "<tr><td>Approving Manager</td><td>Expense Date</td><td>Amount</td><td>Description</td><td>Expense Id</td></tr>";
 	exptbd.innerHTML = "<tr><td>Approving Manager</td><td>Expense Date</td><td>Amount</td><td>Description</td><td>Expense Id</td></tr>";
-	AjaxGet("manage?" + sel.selectedOptions[0].getAttribute("email"),PopulateSelectedEmployeeExpenses);
+	var emp  = sel.selectedOptions[0];
+	putEmployeeInfo(emp)
+	AjaxGet("manage?" + emp.getAttribute("email"),PopulateSelectedEmployeeExpenses);
 }
 
 

@@ -5,7 +5,10 @@
 function EmployeeInfo(xhr){
 	var res = JSON.parse(xhr.responseText);
 	var ei = document.getElementById("employeename");
+	var e = document.getElementById("employeelog");
 	ei.innerText = "Welcome " + res.email;
+	e.innerText = "Logged in as " + res.fname + " " + res.lname;
+	
 }
 
 function EmployeeSettingsInfo(xhr){

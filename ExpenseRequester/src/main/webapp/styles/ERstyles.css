@@ -23,16 +23,20 @@ body {
 }
 .nothover,
 .unselected {
-	background-color: #f4f7fc;
+	background-color: #c7d1c6;
 }
 tr{
-	outline: solid #a566a3 0px;
+	outline: solid #7e967c 0px;
+	text-align:center;
+	padding: 3px;
 }
 .selected{
 	background-color: #c6e2c3;
+	outline: solid #7e967c 1px;
 }
 
 .hover{
 	background-color:#c6e2c3;
+	outline: solid #7e967c 1px;
 }
 
