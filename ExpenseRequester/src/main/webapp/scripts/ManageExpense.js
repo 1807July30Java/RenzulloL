@@ -48,9 +48,7 @@ function ApproveExpense(tablename){
 	selected.forEach(
 			function(element){
 				var expid = element.childNodes[expidpos].innerText;
-				console.log(expid);
 				var url = 'expenseadd?ExpenseId=' + expid + "&val=1";
-				console.log(url);
 				AjaxGet(url,ifApproved);
 			}
 	)
@@ -63,9 +61,7 @@ function DenyExpense(tablename){
 	selected.forEach(
 			function(element){
 				var expid = element.childNodes[expidpos].innerText;
-				console.log(expid);
 				var url = 'expenseadd?ExpenseId=' + expid+"&val=2";
-				console.log(url);
 				AjaxGet(url,ifDenied);
 			}
 	)
