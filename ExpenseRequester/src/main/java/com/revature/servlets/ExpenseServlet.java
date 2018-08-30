@@ -21,12 +21,13 @@ import com.revature.dao.ExpenseDAO;
 import com.revature.dao.ExpenseDAOImpl;
 import com.revature.pojo.Employee;
 import com.revature.pojo.Expense;
-
+import org.apache.log4j.Logger;
 @MultipartConfig
 public class ExpenseServlet extends HttpServlet {
 	private ExpenseDAO exd = new ExpenseDAOImpl();
 	private EmployeeDAO ed = new EmployeeDAOImpl();
 	private ObjectMapper om = new ObjectMapper();
+	private static Logger log = Logger.getRootLogger();
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 		HttpSession session = req.getSession(false);
 		Employee E = ed.getEmployeeByUsername((String)session.getAttribute("username"));
@@ -48,6 +49,8 @@ public class ExpenseServlet extends HttpServlet {
 		java.sql.Date d = java.sql.Date.valueOf(ld);
 		int a = Integer.parseInt(req.getParameter("expenseamount"));
 		String description = req.getParameter("expensedescription");
+		System.out.println(description);
+		log.info("Expense Description: " + description);
 		 Part file = req.getPart("imagefile");
          InputStream blob = file.getInputStream();
          HttpSession session = req.getSession(false);

@@ -139,7 +139,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 int manager_id = rs.getInt("MANAGER_ID");
                 E = new Employee(id, manager_id, email,fname,lname, password);
             } else {
-                System.out.println("No Employees with that username/password combo");
+                System.out.println("No Employees with that username");
             }
             con.close();
             return E;
@@ -216,7 +216,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 int id = rs.getInt("MANAGER_ID");
                 E = getEmployeeById(id);
             } else {
-                System.out.println("No Employees with that username/password combo");
+                System.out.println("No Expenses with that ID");
             }
             con.close();
             return E;

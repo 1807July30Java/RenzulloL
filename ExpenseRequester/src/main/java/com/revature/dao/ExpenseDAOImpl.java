@@ -114,7 +114,7 @@ public class ExpenseDAOImpl implements ExpenseDAO {
             pstmt.setDate(3,(java.sql.Date) date);
             pstmt.setInt(4,amount);
             pstmt.setString(5, desc);
-            pstmt.setBlob(5,blob);
+            pstmt.setBlob(6,blob);
             pstmt.executeUpdate();
         } catch (SQLException | IOException e) {
             e.printStackTrace();
